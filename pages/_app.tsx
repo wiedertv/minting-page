@@ -5,12 +5,17 @@ import GlobalStyle from '../styled-components/GlobalStyles.styled'
 
 const theme: DefaultTheme = {
   colors: {
-    primary: 'blue',
-    secondary: '#0070f3',
+    primary: '#FEFFFE',
+    secondary: '#FFFFFF',
+    offColor: '#c3c3c3',
+    spheres: '#EDBF6B',
+    accent: '#EDBF6B',
   },
   backgrounds:{
-    primary: '#feffff',
-    secondary: '#f3f3f3',
+    primary: '#0F0E0E',
+    secondary: '#161616',
+    offColor: '#737373',
+    accent: '#EDBF6B',
   }
 }
 
