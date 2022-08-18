@@ -4,6 +4,7 @@ import { Menu } from "../components/Menu"
 import styled from "styled-components"
 import { device } from "../utils/devices"
 import { MetamaskButton } from "../components/MetamaskButton"
+import Image from "next/image"
 
 interface Props {
     title?: string
@@ -11,9 +12,8 @@ interface Props {
 }
 
 const MainWrapper = styled.main`
-  min-height: 82vh;
+  min-height: 83.4vh;
   position: relative;
-  z-index: 10;
 `
 
 const FooterStyled = styled.footer`
@@ -21,7 +21,7 @@ const FooterStyled = styled.footer`
   z-index: 10;
   min-height: 3vh;
   width: 100vw;
-  padding: 0 5vw;
+  padding: 1vh   5vw;
   background: ${(props) => props.theme.backgrounds.secondary};
   color: ${(props) => props.theme.colors.secondary};
   display: flex;
@@ -30,10 +30,6 @@ const FooterStyled = styled.footer`
   align-items: center;
   @media ${device.mobileXS} {
     flex-direction: column;
-    h1{
-      font-size: 2rem;
-      text-align: center;
-    }
     p{
       font-size: 0.8rem;
     }
@@ -41,9 +37,6 @@ const FooterStyled = styled.footer`
     @media ${device.laptop} {
       flex-direction: row;
       justify-content: space-between;
-      h1{
-        font-size: 1.3rem;
-      }
       p{
         color: ${(props) => props.theme.colors.offColor};
         font-size: 0.8rem;
@@ -61,7 +54,7 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title, desc
             description || 
             "Not Only a JPG is a platform for 3d crypto Art."}`
             } />
-        <link rel="ico" href="/favicon.ico" />
+        <link rel="ico" href="/favicon.png" />
         </Head>
         <Menu />
         <MainWrapper>
@@ -73,10 +66,7 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title, desc
 
 
         <FooterStyled>
-            <h1>
-              Not Only <br/>
-                a JPG
-            </h1>
+            <Image src="/images/logo_tipografico.png" alt='Logo Tipografico de Not Only A JPG' width={100} height={50} />
             <p>
               NOJPG is a registered trademark - 2022.
             </p>

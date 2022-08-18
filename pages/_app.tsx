@@ -6,16 +6,16 @@ import GlobalStyle from '../styled-components/GlobalStyles.styled'
 const theme: DefaultTheme = {
   colors: {
     primary: '#FEFFFE',
-    secondary: '#FFFFFF',
+    secondary: '#DDDDDD',
     offColor: '#c3c3c3',
-    spheres: '#EDBF6B',
-    accent: '#EDBF6B',
+    spheres: '#ECBF6A',
+    accent: '#ECBF6A',
   },
   backgrounds:{
-    primary: '#0F0E0E',
+    primary: '#1d1d1d',
     secondary: '#161616',
     offColor: '#737373',
-    accent: '#EDBF6B',
+    accent: '#ECBF6A',
   }
 }
 

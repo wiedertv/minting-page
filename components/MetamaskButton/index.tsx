@@ -1,17 +1,41 @@
+import Image from 'next/image';
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { connectToMetamask } from '../../utils/ethers'
 
 
 const Button = styled.button`
+    width: 80%;
     background: transparent;
     border: 1.2px solid #fff;
     color: #fff;
-    font-size: 1.1rem;
     border-radius: 11px;
-    padding: 0.5rem 1rem;
+    font-family: 'Lato';
+    font-weight: 100;
+    padding: 0.5rem 0 ;
     margin: 0;
-
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    div{
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    span{
+        position: relative;
+        height: 100%;
+        display: flex;
+        font-size: 1rem;
+    }
+    &:hover{
+        scale: 1.05;
+        cursor: pointer;
+    }
 `;
 
 
@@ -31,7 +55,14 @@ export const MetamaskButton = () => {
 
   return (
     <>
-        <Button onClick={() => connectToMetamask()}> Connect Metamask </Button>
+        <Button onClick={() => connectToMetamask()}> 
+            <div>
+                <Image src="/images/metamask.png" alt='Logo de Metamask' width={30} height={30} />
+            </div>
+            <span>
+                 Metamask
+            </span>
+        </Button>
     </>
   )
 }
