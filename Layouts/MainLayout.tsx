@@ -3,7 +3,6 @@ import Head from "next/head"
 import { Menu } from "../components/Menu"
 import styled from "styled-components"
 import { device } from "../utils/devices"
-import { MetamaskButton } from "../components/MetamaskButton"
 import Image from "next/image"
 
 interface Props {
@@ -54,7 +53,7 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title, desc
             description || 
             "Not Only a JPG is a platform for 3d crypto Art."}`
             } />
-        <link rel="ico" href="/favicon.png" />
+        <link rel="ico" href="/favicon.ico" />
         </Head>
         <Menu />
         <MainWrapper>

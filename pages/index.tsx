@@ -1,10 +1,19 @@
 import type { NextPage } from 'next'
+import { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { MainLayout } from '../Layouts/MainLayout'
+import { device } from '../utils/devices';
+import { getWindowSize } from '../utils/util';
 
 const MintingPage = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media ${device.mobileXS} {
+    grid-template-columns: 1fr;
+  }
+  @media ${device.laptop} {
+    grid-template-columns: 1fr 1fr;
+  }
   position: relative;
   height: 100%;
   width: 80%;
@@ -13,8 +22,66 @@ const MintingPage = styled.section`
   margin: 0 auto;
   `;
 
-const Container = styled.div`
+const ContainerText = styled.div`
+  display: flex;  
+  @media ${device.mobileXS} {
+    grid-row: 2;
+    grid-column: 1;
+    width: 100%;
+  }
+  @media ${device.laptop} {
+    grid-column: 1;
+    grid-row: 1;
+    width: 70%;
+  }
+  grid-column: 1;
+  grid-row: 1;
+  flex-direction: column;
+  align-items: center;
+  min-height: 10vh;
+  width: 70%;
+  position: relative;
+`;
+const ContainerVideo = styled.div`
   display: flex;
+  @media ${device.mobileXS} {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  @media ${device.laptop} {
+    grid-column: 2;
+    grid-row: 1;
+    video {
+      max-width: 400px;
+      max-height: 800px;
+    }
+  }
+  @media ${device.laptopL} {
+    grid-column: 2;
+    grid-row: 1;
+    video {
+      max-width: 450px;
+      max-height: 800px;
+    }
+  }
+  @media ${device.desktop} {
+    grid-column: 2;
+    grid-row: 1;
+    video {
+      max-width: 500px;
+      max-height: 800px;
+    }
+  }
+  @media ${device.desktopL} {
+    grid-column: 2;
+    grid-row: 1;
+    video {
+      max-width: 600px;
+      max-height: 800px;
+    }
+  }
+  grid-column: 2;
+  grid-row: 1;
   flex-direction: column;
   align-items: center;
   min-height: 10vh;
@@ -23,6 +90,24 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
+  @media ${device.mobileXS} {
+    font-size: 3rem;
+  }
+  @media ${device.tablet} {
+    font-size: 4.5rem;
+  }
+  @media ${device.laptop} {
+    font-size: 3.5rem;
+  }
+  @media ${device.laptopL} {
+    font-size: 5.3rem;
+  }
+  @media ${device.desktop} {
+    font-size: 6rem;
+  }
+  @media ${device.desktopL} {
+    font-size: 6rem;
+  }
   font-size: 6rem;
   font-weight: bold;
   font-family: 'GandhiSerifBold';
@@ -32,6 +117,24 @@ const Title = styled.h1`
 `;
 
 const Counter = styled.h3`
+  @media ${device.mobileXS} {
+    font-size: 2.5rem;
+  }
+  @media ${device.tablet} {
+    font-size: 4rem;
+  }
+  @media ${device.laptop} {
+    font-size: 3.5rem;
+  }
+  @media ${device.laptopL} {
+    font-size: 4.2rem;
+  }
+  @media ${device.desktop} {
+    font-size: 5rem;
+  }
+  @media ${device.desktopL} {
+    font-size: 5rem;
+  }
   font-size: 5rem;
   font-weight: 400;
   margin: 0;
@@ -41,6 +144,29 @@ const Counter = styled.h3`
 `;
 
 const Description = styled.p`
+  @media ${device.mobileXS} {
+    font-size: 1rem;
+  }
+  @media ${device.tablet} {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  @media ${device.laptop} {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media ${device.laptopL} {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  @media ${device.desktop} {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  @media ${device.desktopL} {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
   font-size: 1.5rem;
   font-weight: 300;
   text-align: center;
@@ -50,17 +176,22 @@ const Description = styled.p`
   `;
 
 const MintingWrapper = styled.div`
+  @media ${device.mobileXS} {
+    margin: 1rem 0 0 0;
+  }
+  @media ${device.laptop} {
+    margin: 0;
+  }
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const FormControllerWrapper = styled.div`
   display: flex;
-  margin-top: 2rem;
-  flex-direction: row;
   justify-content: center;
   gap: 1.5rem;
   align-items: center;
@@ -81,10 +212,23 @@ const FormControllerButton = styled.button`
 `;
 
 const FormControllerInput = styled.input`
+  @media ${device.mobileXS} {
+    font-size: 1rem;
+    width: 15%;
+  }
+  @media ${device.tablet} {
+    font-size: 2rem;  
+    width: 15%;
+    max-width: 15%;
+  }
+  @media ${device.laptop} {
+    font-size: 2rem;  
+    max-width: 15%;
+  }
   font-size: 2rem;
   border: 2px solid white;
   border-radius: 7px;
-  padding: 0.5rem 0rem;      
+  padding: 0.5rem 0;      
   font-family: 'GandhiSerifRegular';
   margin: 0;
   text-align: center;
@@ -125,6 +269,12 @@ const MintButton = styled.button`
 `;
 
 const TotalMinted = styled.h3`
+  @media ${device.mobileXS} {
+    margin: 1rem 0 1rem 0;
+  }
+  @media ${device.laptop} {
+    margin: 0;
+  }
   font-size: 1.3rem;
   font-weight: 300;
   margin: 0;
@@ -148,12 +298,26 @@ const BackgroundSphere = styled.div`
 `;
 
 const Home: NextPage = () => {
+
+
+  const [{width, height}, setWindowSize] = useState({width: 0, height: 0});
+
+  useEffect(() => {
+    setWindowSize(getWindowSize());
+
+    window.addEventListener('resize', () => setWindowSize(getWindowSize()));
+
+    return () => {
+      window.removeEventListener('resize', ()=> setWindowSize(getWindowSize()));
+    };
+  }, []);
+
   return (
     <>
 
       <MainLayout >
         <MintingPage > 
-          <Container>
+          <ContainerText>
             <Title>Mark Rise</Title>
             <Counter> 00:10:00 </Counter>
             <Description>
@@ -185,15 +349,25 @@ const Home: NextPage = () => {
             </MintingWrapper>
 
 
-          </Container>
-          <Container>
+          </ContainerText>
+          <ContainerVideo>
             <BackgroundSphere />
-            <video style={{"zIndex": 1}} src={require('../utils/assets/video.webm')}  width={600} height={800} autoPlay loop muted />
-          </Container>
+            {width > 0 && height > 0 ? (
+              <video 
+                style={{"zIndex": 1}} 
+                src={require('../utils/assets/video.webm')}  
+                width={width > 280 && width < 1024 && width*0.8 || width } 
+                height={width > 280 && width < 1024 && height/2 || height } 
+                autoPlay 
+                loop 
+                muted 
+              />
+            ): null}
+          </ContainerVideo>
         </MintingPage>
       </MainLayout>
     </>
   )
 }
 
-export default Home
+export default Home;

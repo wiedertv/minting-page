@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { device } from '../utils/devices'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -36,7 +37,18 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-
+  @media ${device.laptop} {
+    overflow: hidden;
+  }
+  @media ${device.laptopL} {
+    overflow: hidden;
+  }
+  @media ${device.desktop} {
+    overflow: hidden;
+  }
+  @media ${device.desktopL} {
+    overflow: hidden;
+  }
 @media screen and (max-width: 1024px) {
   html,
   body {
