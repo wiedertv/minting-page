@@ -417,14 +417,15 @@ const Home: NextPage = () => {
           <ContainerVideo>
             <BackgroundSphere />
             {width > 0 && height > 0 ? (
-              <Image 
-                style={{"zIndex": 1}} 
-                src='/images/transparent.gif'
-                alt='Art Gif'  
-                width={475} 
-                height={560}
-                unoptimized={true} 
-              />
+              <video 
+              style={{"zIndex": 1}} 
+              src={require('../utils/assets/video.webm')}  
+              width={width > 280 && width < 1024 && width*0.8 || width } 
+              height={width > 280 && width < 1024 && height/2 || height } 
+              autoPlay 
+              loop 
+              muted 
+            />
             ): null}
           </ContainerVideo>
         </MintingPage>
