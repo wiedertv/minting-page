@@ -1,8 +1,12 @@
+import { ethers } from 'ethers';
 import type { NextPage } from 'next'
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { MainLayout } from '../Layouts/MainLayout'
 import { device } from '../utils/devices';
+import { costToMint, idToMint, isSaleActive, mint, mintedPieces } from '../utils/ethers';
+import { stringifyANumber } from '../utils/formatter';
 import { getWindowSize } from '../utils/util';
 
 const MintingPage = styled.section`
@@ -209,6 +213,12 @@ const FormControllerButton = styled.button`
   color: ${(props) => props.theme.colors.primary};
   border-radius: 100%;
   font-family: 'GandhiSerifRegular';
+  &:hover{
+    cursor: pointer;
+  }
+  &:focus{
+    outline: none;
+  }
 `;
 
 const FormControllerInput = styled.input`
@@ -252,7 +262,7 @@ const MintButton = styled.button`
   width: 50%;
   padding: 0.8rem 2.5rem;
   font-family: 'GandhiSerifRegular';
-  margin: 1.4rem 0.5rem 0 0.5rem;
+  margin: 1rem 0.5rem 0 0.5rem;
   font-size: 1.4rem;
 
 
@@ -270,7 +280,7 @@ const MintButton = styled.button`
 
 const TotalMinted = styled.h3`
   @media ${device.mobileXS} {
-    margin: 1rem 0 1rem 0;
+    margin: 1rem 0.5rem 0 0.5rem;
   }
   @media ${device.laptop} {
     margin: 0;
@@ -280,7 +290,8 @@ const TotalMinted = styled.h3`
   margin: 0;
   font-family: 'GandhiSerifRegular';
   text-align: center;
-  margin-top: 1rem;
+  padding: 0.7rem 0 0 0;
+  margin: 1rem 0.5rem 0 0.5rem;
   color: ${(props) => props.theme.colors.secondary};
 `;
 
@@ -299,8 +310,12 @@ const BackgroundSphere = styled.div`
 
 const Home: NextPage = () => {
 
-
   const [{width, height}, setWindowSize] = useState({width: 0, height: 0});
+  const [quantity, setQuantity] = useState(0);
+  const [totalMinted, setTotalMinted] = useState(0);
+  const [costPerPiece, setCostPerPiece] = useState(0);
+  const [account, setAccount] = useState(null);
+  const [isActive, setIsActive] = useState('Inactive Mint');
 
   useEffect(() => {
     setWindowSize(getWindowSize());
@@ -312,6 +327,45 @@ const Home: NextPage = () => {
     };
   }, []);
 
+  const setAccountListener = (provider: any) => {
+    provider.removeListener("accountsChanged", () => {});
+    provider.on("accountsChanged", () => {
+      if (!provider.selectedAddress) {
+        setAccount(null);
+      } 
+      else {
+        setAccount(provider.selectedAddress);
+      }
+      });
+
+  };
+
+  useEffect(() => {
+    // @ts-ignore
+    const { ethereum } = window;
+    if(ethereum){
+      setAccountListener(ethereum);
+      mintedPieces().then((respuesta)=>{
+        setTotalMinted(Number(respuesta));
+      })
+      costToMint().then((respuesta)=>{
+        setCostPerPiece(Number(respuesta));
+      })
+      isSaleActive().then((respuesta)=>{
+        setIsActive(respuesta ? "Active Mint": "Inactive Mint");
+      })
+    }
+  }, [account])
+
+  const handleMint = () => {
+    mint(quantity);
+    mintedPieces().then((respuesta)=>{
+      console.log('que hubo',Number(respuesta));
+      setTotalMinted(Number(respuesta));
+    })
+  }
+
+
   return (
     <>
 
@@ -319,32 +373,40 @@ const Home: NextPage = () => {
         <MintingPage > 
           <ContainerText>
             <Title>Mark Rise</Title>
-            <Counter> 00:10:00 </Counter>
+            <Counter> { isActive } </Counter>
             <Description>
               Exclusive Mint of art in collaboration <br/>
               with Mark Rise for Not Only a JPG.
             </Description>
             <MintingWrapper>
                 <FormControllerWrapper>
-                  <FormControllerButton 
+                  <FormControllerButton
+                    onClick={ () => setQuantity((prev) => prev <= 0 ? prev : prev - 1 ) } 
                   >
                     −
                   </FormControllerButton>
                   <FormControllerInput 
                   type="number"
                   readOnly 
-                  value={"01"} />
+                  value={stringifyANumber(quantity)} />
                   <FormControllerButton
+                    onClick={ () => setQuantity((prev) => prev >= 30 ? prev : prev + 1 ) } 
                     >
                     +
                   </FormControllerButton>
                 </FormControllerWrapper>
+                <TotalMinted>
+                  Cost per piece: { costPerPiece/ 10**18 } MATIC
+                </TotalMinted>
                 <MintButton 
+                  onClick={()=> {
+                      handleMint();
+                  }}
                   >
                 Mint  
               </MintButton>
               <TotalMinted>
-                Minted Pieces: 0
+                Minted Pieces: { totalMinted }
               </TotalMinted>
             </MintingWrapper>
 
@@ -353,14 +415,12 @@ const Home: NextPage = () => {
           <ContainerVideo>
             <BackgroundSphere />
             {width > 0 && height > 0 ? (
-              <video 
+              <Image 
                 style={{"zIndex": 1}} 
-                src={require('../utils/assets/video.webm')}  
-                width={width > 280 && width < 1024 && width*0.8 || width } 
-                height={width > 280 && width < 1024 && height/2 || height } 
-                autoPlay 
-                loop 
-                muted 
+                src='/images/transparent.gif'
+                alt='Art Gif'  
+                width={width > 280 && width < 1024 && width*0.8|| width*0.8 } 
+                height={width > 280 && width < 1024 && height*0.8*5/6 || height*1.8 } 
               />
             ): null}
           </ContainerVideo>

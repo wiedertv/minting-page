@@ -41,11 +41,6 @@ const Button = styled.button<{connected?:boolean}>`
     }
 `;
 
-function handleAccountChange(provider: any){
-
-}
-
-
 const MetamaskButton = memo(() => {
     const [isConnected, setIsConnected] = React.useState(false);
     const [account, setAccount] = React.useState(null);
@@ -58,11 +53,6 @@ const MetamaskButton = memo(() => {
         if (ethereum) {
             if(ethereum.selectedAddress !== account){
                 setAccount(ethereum.selectedAddress);
-                localStorage.setItem('authentication', JSON.stringify({
-                    account,
-                    chainId,
-                    isConnected,
-                }) );
             }
 
             if (ethereum.networkVersion !== chainId) {
@@ -95,20 +85,12 @@ const MetamaskButton = memo(() => {
         // @ts-ignore
         const metamaskInfo = provider.provider;
         if (provider) {
-            setIsConnected(true);
-            setAccount(metamaskInfo.selectedAddress);
-            setChain(metamaskInfo.chainId);
-           localStorage.setItem('authentication', JSON.stringify({
-            isConnected: true,
-            account: metamaskInfo.selectedAddress,
-            chain: metamaskInfo.chainId
-           }));
-
+          setIsConnected(true);
+          setAccount(metamaskInfo.selectedAddress);
+          setChain(metamaskInfo.chainId);
         }
     }
-    const handleAccount = (provider: any) => {
 
-      };
 
 
     const setAccountListener = (provider: any) => {
@@ -119,29 +101,14 @@ const MetamaskButton = memo(() => {
         if (!provider.selectedAddress) {
           setAccount(null);
           setIsConnected(false);
-          localStorage.removeItem('authentication');
         } 
         else {
-          const data = localStorage.getItem('authentication');
-          if (data) {
-            const { account, chainId, isConnected } = JSON.parse(data);
-            if(account === provider.selectedAddress){
-              setAccount(account);
-              setChain(chainId);
-              setIsConnected(isConnected);
-            } else{
-              setAccount(provider.selectedAddress);
-              setIsConnected(true);
-              localStorage.setItem('authentication', JSON.stringify({
-                  isConnected: true,
-                  account: provider.selectedAddress,
-                  chain: provider.networkVersion
-              }));
-            }
+          setIsConnected(isConnected);
+          setAccount(provider.selectedAddress);
+          setChain(provider.chainId);
+          setIsConnected(true);
         }
-        }
-  
-      });
+        });
       provider.on("chainChanged", () => {
         console.log('chainChanged called');
           setChain(provider.chainId);
@@ -150,20 +117,25 @@ const MetamaskButton = memo(() => {
 
 
 
-      useEffect(() => {
-        // @ts-ignore
-        const { ethereum } = window;
-         if (ethereum) {
-           setAccountListener(ethereum);
-         } else {
-           console.error("Please, install Metamask.");
-         }
-         return () => { 
-          ethereum.removeListener("chainChanged", () => {});
-          ethereum.removeListener("accountsChanged", () => {});
-         }
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-       },[]);
+    useEffect(() => {
+      // @ts-ignore
+      const { ethereum } = window;
+        if (ethereum) {
+          setAccountListener(ethereum);
+          if(ethereum.selectedAddress){
+            setAccount(ethereum.selectedAddress);
+            setChain(ethereum.chainId);
+            setIsConnected(true);
+          }
+        } else {
+          console.error("Please, install Metamask.");
+        }
+        return () => { 
+        ethereum.removeListener("chainChanged", () => {});
+        ethereum.removeListener("accountsChanged", () => {});
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      },[]);
    
 
 
@@ -184,7 +156,6 @@ const MetamaskButton = memo(() => {
                       setAccount(null);
                       setChain(null);
                       setIsConnected(false);
-                      localStorage.removeItem('authentication');
                 } }
                 connected
             > 
