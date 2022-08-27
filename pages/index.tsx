@@ -422,7 +422,8 @@ const Home: NextPage = () => {
                 src='/images/transparent.gif'
                 alt='Art Gif'  
                 width={475} 
-                height={560} 
+                height={560}
+                unoptimized={true} 
               />
             ): null}
           </ContainerVideo>
