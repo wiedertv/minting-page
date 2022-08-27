@@ -11,6 +11,9 @@ interface Props {
 }
 
 const MainWrapper = styled.main`
+  display: flex;
+  justify-items: center;
+  align-items: center;
   min-height: 83.4vh;
   position: relative;
 `

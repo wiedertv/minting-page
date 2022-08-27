@@ -20,9 +20,11 @@ const MintingPage = styled.section`
   }
   position: relative;
   height: 100%;
-  width: 80%;
+  width: 82%;
   align-items: center;
   justify-items: center;
+  align-content: center;
+  justify-content: center;
   margin: 0 auto;
   `;
 
@@ -419,8 +421,8 @@ const Home: NextPage = () => {
                 style={{"zIndex": 1}} 
                 src='/images/transparent.gif'
                 alt='Art Gif'  
-                width={width > 280 && width < 1024 && width*0.8|| width*0.8 } 
-                height={width > 280 && width < 1024 && height*0.8*5/6 || height*1.8 } 
+                width={475} 
+                height={560} 
               />
             ): null}
           </ContainerVideo>
