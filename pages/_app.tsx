@@ -21,11 +21,14 @@ const theme: DefaultTheme = {
 
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const TEN_MINS_IN_MS = 10 * 60 * 1000;
+  const NOW_IN_MS = 1661727600000;
+  const TARGET_DATE = TEN_MINS_IN_MS + NOW_IN_MS;
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <Component {...pageProps} TARGET_DATE={TARGET_DATE} />
       </ThemeProvider>
     </>
   )

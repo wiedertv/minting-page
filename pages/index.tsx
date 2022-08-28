@@ -7,6 +7,7 @@ import { MainLayout } from '../Layouts/MainLayout'
 import { device } from '../utils/devices';
 import { costToMint, idToMint, isSaleActive, mint, mintedPieces } from '../utils/ethers';
 import { stringifyANumber } from '../utils/formatter';
+import { useCountdown } from '../utils/hooks/useCountdown';
 import { getWindowSize } from '../utils/util';
 
 const MintingPage = styled.section`
@@ -310,14 +311,15 @@ const BackgroundSphere = styled.div`
 
 `;
 
-const Home: NextPage = () => {
+const Home: NextPage<{TARGET_DATE: number}> = ({TARGET_DATE}) => {
 
+  const [days, hours, minutes, seconds] = useCountdown(TARGET_DATE);
   const [{width, height}, setWindowSize] = useState({width: 0, height: 0});
   const [quantity, setQuantity] = useState(0);
   const [totalMinted, setTotalMinted] = useState(0);
   const [costPerPiece, setCostPerPiece] = useState(0);
   const [account, setAccount] = useState(null);
-  const [isActive, setIsActive] = useState('Inactive Mint');
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     setWindowSize(getWindowSize());
@@ -354,7 +356,7 @@ const Home: NextPage = () => {
         setCostPerPiece(Number(respuesta));
       })
       isSaleActive().then((respuesta)=>{
-        setIsActive(respuesta ? "Active Mint": "Inactive Mint");
+        setIsActive(respuesta);
       })
     }
   }, [account])
@@ -375,7 +377,16 @@ const Home: NextPage = () => {
         <MintingPage > 
           <ContainerText>
             <Title>Mark Rise</Title>
-            <Counter> { isActive } </Counter>
+            <Counter>
+              {
+                 minutes > 10 ? ( "00: 10: 00") :
+                 minutes === 0 && seconds == 0 ? (
+                  "Mint is Over"
+                 ) : (<>
+                        00:{minutes < 10 ? "0"+ minutes: minutes}:{seconds < 10 ? "0"+ seconds: seconds}
+                      </>)                 
+              } 
+            </Counter>
             <Description>
               Exclusive Mint of art in collaboration <br/>
               with Mark Rise for Not Only a JPG.
@@ -401,6 +412,7 @@ const Home: NextPage = () => {
                   Cost per piece: { costPerPiece/ 10**18 } MATIC
                 </TotalMinted>
                 <MintButton 
+                  disabled={isActive}
                   onClick={()=> {
                       handleMint();
                   }}
