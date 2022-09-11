@@ -10,7 +10,7 @@ const Button = styled.button<{connected?:boolean}>`
     border: 1.2px solid #fff;
     color: ${props => props.connected ? '#000' : '#DDDDDD'};
     border-radius: 11px;
-    font-family: 'Lato';
+    font-family: SpaceRanger;
     font-weight: ${props => props.connected ? '500' : '100'};
     padding: 0.5rem 0 ;
     margin: 0;

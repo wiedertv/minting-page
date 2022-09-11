@@ -3,11 +3,11 @@ import { device } from '../utils/devices'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'GandhiSerifBold';
+    font-family: 'SpaceRanger';
     src: url('/fonts/GandhiSerif-Bold.otf');
   }
   @font-face {
-    font-family: 'GandhiSerifBoldItalic';
+    font-family: 'SpaceRangerItalic';
     src: url('/fonts/GandhiSerif-BoldItalic.otf');
   }
   @font-face {
@@ -15,8 +15,12 @@ const GlobalStyle = createGlobalStyle`
     src: url('/fonts/GandhiSerif-Italic.otf');
   }
   @font-face {
-    font-family: 'GandhiSerifRegular';
+    font-family: 'SpaceRanger';
     src: url('/fonts/GandhiSerif-Regular.otf');
+  }
+  @font-face {
+    font-family: 'SpaceRanger';
+    src: url('/fonts/spaceranger.ttf');
   }
 
 
@@ -28,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     padding: 0;
     margin: 0;
-    font-family: Lato;
+    font-family: SpaceRanger;
   }
   a {
     color: inherit;

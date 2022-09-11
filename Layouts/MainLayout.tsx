@@ -70,7 +70,7 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title, desc
         <FooterStyled>
             <h1>HTHA</h1>
             <p>
-              Pàgina creada por <a href="https://twitter.com/wiedertv">WiederTV</a>  - 2022.
+              Pàgina creada por <a href="https://twitter.com/wiedertv" target={'_blank'} rel="noreferrer" >WiederTV</a>  - 2022.
             </p>
         </FooterStyled>
     </>

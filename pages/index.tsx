@@ -53,12 +53,16 @@ const ContainerVideo = styled.div`
   @media ${device.mobileXS} {
     grid-row: 1;
     grid-column: 1;
+    video {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
   @media ${device.laptop} {
     grid-column: 2;
     grid-row: 1;
     video {
-      max-width: 400px;
+      max-width: 100%;
       max-height: 800px;
     }
   }
@@ -66,7 +70,7 @@ const ContainerVideo = styled.div`
     grid-column: 2;
     grid-row: 1;
     video {
-      max-width: 450px;
+      max-width: 100%;
       max-height: 800px;
     }
   }
@@ -74,7 +78,7 @@ const ContainerVideo = styled.div`
     grid-column: 2;
     grid-row: 1;
     video {
-      max-width: 500px;
+      max-width: 100%;
       max-height: 800px;
     }
   }
@@ -82,7 +86,7 @@ const ContainerVideo = styled.div`
     grid-column: 2;
     grid-row: 1;
     video {
-      max-width: 600px;
+      max-width: 100%;
       max-height: 800px;
     }
   }
@@ -90,10 +94,27 @@ const ContainerVideo = styled.div`
   grid-row: 1;
   flex-direction: column;
   align-items: center;
-  min-height: 10vh;
-  width: 60%;
+  min-height: 10vh;      
+  max-width: 100%;
+  max-height: 800px;
+  width: 90%;
+  padding:10px;
   position: relative;
-  background: red;
+  div{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+  }
+  div:nth-child(2){
+    background: ${({theme}) => theme.colors.accent};
+    top:0;
+    left:0;
+  }
+  div:nth-child(3){
+    background: ${({theme}) => theme.colors.spheres};
+    right: 0;
+    bottom: 0;
+  }
 `;
 
 const Title = styled.h1`
@@ -104,20 +125,20 @@ const Title = styled.h1`
     font-size: 4.5rem;
   }
   @media ${device.laptop} {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
   }
   @media ${device.laptopL} {
-    font-size: 5.3rem;
+    font-size: 4.3rem;
   }
   @media ${device.desktop} {
-    font-size: 6rem;
+    font-size: 5rem;
   }
   @media ${device.desktopL} {
-    font-size: 6rem;
+    font-size: 5rem;
   }
   font-size: 6rem;
   font-weight: bold;
-  font-family: 'GandhiSerifBold';
+  font-family: 'Lato';
   text-align: center;
   margin: 0;
   color: ${(props) => props.theme.colors.primary};
@@ -131,22 +152,22 @@ const Counter = styled.h3`
     font-size: 4rem;
   }
   @media ${device.laptop} {
-    font-size: 3.5rem;
+    font-size: 2.7rem;
   }
   @media ${device.laptopL} {
-    font-size: 4.2rem;
+    font-size: 3.2rem;
   }
   @media ${device.desktop} {
-    font-size: 5rem;
+    font-size: 4rem;
   }
   @media ${device.desktopL} {
-    font-size: 5rem;
+    font-size: 4rem;
   }
   font-size: 5rem;
   font-weight: 400;
   margin: 0;
   text-align: center;
-  font-family: 'GandhiSerifRegular';
+  font-family: 'Lato';
   color: ${(props) => props.theme.colors.accent};
 `;
 
@@ -177,7 +198,7 @@ const Description = styled.p`
   font-size: 1.5rem;
   font-weight: 300;
   text-align: center;
-  font-family: 'GandhiSerifRegular';
+  font-family: 'Lato';
   margin: 0;
   color: ${(props) => props.theme.colors.secondary};
   `;
@@ -215,7 +236,7 @@ const FormControllerButton = styled.button`
   border: none;
   color: ${(props) => props.theme.colors.primary};
   border-radius: 100%;
-  font-family: 'GandhiSerifRegular';
+  font-family: 'laptop';
   &:hover{
     cursor: pointer;
   }
@@ -242,7 +263,7 @@ const FormControllerInput = styled.input`
   border: 2px solid white;
   border-radius: 7px;
   padding: 0.5rem 0;      
-  font-family: 'GandhiSerifRegular';
+  font-family: 'Lato';
   margin: 0;
   text-align: center;
   background: transparent;
@@ -265,7 +286,7 @@ const MintButton = styled.button`
   width: 50%;
   text-align: center;
   padding: 0.8rem 2.5rem;
-  font-family: 'GandhiSerifRegular';
+  font-family: 'Lato';
   margin: 1rem 0.5rem 0 0.5rem;
   font-size: 1.4rem;
  
@@ -291,9 +312,9 @@ const TotalMinted = styled.h3`
   font-size: 1.3rem;
   font-weight: 300;
   margin: 0;
-  font-family: 'GandhiSerifRegular';
+  font-family: 'Lato';
   text-align: center;
-  padding: 0.7rem 0 0 0;
+  padding: 0.7rem 0 0.7rem 0;
   margin: 1rem 0.5rem 0 0.5rem;
   color: ${(props) => props.theme.colors.secondary};
 `;
@@ -318,7 +339,7 @@ const Home: NextPage = () => {
   const [totalMinted, setTotalMinted] = useState(0);
   const [costPerPiece, setCostPerPiece] = useState(0);
   const [account, setAccount] = useState(null);
-  const [isActive, setIsActive] = useState('Inactive Mint');
+  const [isActive, setIsActive] = useState('Mint Inactivo');
 
   useEffect(() => {
     setWindowSize(getWindowSize());
@@ -355,7 +376,7 @@ const Home: NextPage = () => {
         setCostPerPiece(Number(respuesta));
       })
       isSaleActive().then((respuesta)=>{
-        setIsActive(respuesta ? "Active Mint": "Inactive Mint");
+        setIsActive(respuesta ? "Mint Activo": "Mint Inactivo");
       })
     }
   }, [account])
@@ -375,12 +396,12 @@ const Home: NextPage = () => {
       <MainLayout >
         <MintingPage > 
           <ContainerText>
-            <Title>Coleccion</Title>
+            <Title>Colección HTHA</Title>
             <Counter> { isActive } </Counter>
             <Description>
               Adopta tu perrito <br/>
               o tu gatico. <br />
-              Breve descripcion del proyecto.
+              (Breve descripcion del proyecto.)
             </Description>
             <MintingWrapper>
                 <FormControllerWrapper>
@@ -400,7 +421,7 @@ const Home: NextPage = () => {
                   </FormControllerButton>
                 </FormControllerWrapper>
                 <TotalMinted>
-                  Costo por pieza: { costPerPiece/ 10**18 } (cripto)
+                  Costo por pieza: { costPerPiece/ 10**18 } MATIC.
                 </TotalMinted>
               <MintButton 
                   onClick={()=> {
@@ -420,7 +441,7 @@ const Home: NextPage = () => {
            
             {width > 0 && height > 0 ? (
               <video 
-              style={{"zIndex": 1, padding: '7px 0'}} 
+              style={{"zIndex": 1}} 
               src={require('../utils/assets/video.webm')}  
               
               autoPlay 
@@ -428,6 +449,8 @@ const Home: NextPage = () => {
               muted 
             />
             ): null}
+            <div></div>
+            <div></div>
           </ContainerVideo>
         </MintingPage>
       </MainLayout>

@@ -25,7 +25,7 @@ const Items = styled.ul`
   margin: 0;
   justify-self: center;
   align-items: center;
-  font-family: Lato;
+  font-family: SpaceRanger;
   font-weight: 100;
   font-size: 1.1rem;
   width: 80%;
@@ -61,16 +61,16 @@ export const Menu = () => {
       <NavigationBar>
         <Items>
           <Item>             
-            <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Information</a>
+            <a href="https://twitter.com/0xJK7" target={'_blank'} rel="noreferrer">JK7 Twitter</a>
           </Item>
           <Item>
-            <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Legal Announcements</a>
+            <a href="https://twitter.com/0xJK7" target={'_blank'} rel="noreferrer">RoadMap HTHA</a>
           </Item>
           <Item> 
             <Image src="/images/LogoHTHA.png" alt='Logo de NOJPG' width={90} height={90} />
           </Item>
           <Item>
-            <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Frequent Questions</a>
+            <a href="https://twitter.com/0xJK7" target={'_blank'} rel="noreferrer">Preguntas Frecuentes</a>
           </Item>
           <Item> {width > 1023 ? <MetamaskButton /> : null} </Item>
             

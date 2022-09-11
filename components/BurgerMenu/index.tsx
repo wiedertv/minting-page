@@ -115,7 +115,7 @@ const NavigationMenu = styled.nav<{open: boolean}>`
     text-transform: uppercase;
     padding: 2rem 0;
     font-weight: bold;
-    font-family: 'Lato', sans-serif;
+    font-family: SpaceRanger;
     letter-spacing: 0.1rem;
     color: ${props => props.theme.colors.primary};
     text-decoration: none;
@@ -157,11 +157,11 @@ const Burger = () => {
         </BurgerWrapper>
         <NavigationMenu open={open}>
             { width < 1024 ? <MetamaskButton /> : null }
-            <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Information</a>
+            <a href="https://twitter.com/0xJK7" target={'_blank'} rel="noreferrer">JK7 Twitter</a>
 
-            <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Legal Announcements</a>
+            <a href="https://twitter.com/0xJK7" target={'_blank'} rel="noreferrer">RoadMap HTHA</a>
 
-            <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Frequent Questions</a>
+            <a href="https://twitter.com/0xJK7" target={'_blank'} rel="noreferrer">Preguntas Frecuentes</a>
         </NavigationMenu>
 
 
