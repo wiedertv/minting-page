@@ -8,18 +8,24 @@ const theme: DefaultTheme = {
     primary: '#FEFFFE',
     secondary: '#DDDDDD',
     offColor: '#c3c3c3',
-    spheres: '#ECBF6A',
-    accent: '#ECBF6A',
+    spheres: '#FF3640',
+    accent: '#A5E7E1',
   },
   backgrounds:{
-    primary: '#1d1d1d',
-    secondary: '#161616',
+    primary: '#252D5B',
+    secondary: '#1D2248',
     offColor: '#737373',
-    accent: '#ECBF6A',
+    accent: '#A5E7E1',
   }
 }
 
-
+/*
+#FF3640 Accent
+#00BDD3 Accent 2
+#252D5B BackGround
+#1D2248 Footer Background
+#A5E7E1 Buttons 
+*/
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>

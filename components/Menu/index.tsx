@@ -67,7 +67,7 @@ export const Menu = () => {
             <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Legal Announcements</a>
           </Item>
           <Item> 
-            <Image src="/images/iso.png" alt='Logo de NOJPG' width={26.25} height={70} />
+            <Image src="/images/LogoHTHA.png" alt='Logo de NOJPG' width={90} height={90} />
           </Item>
           <Item>
             <a href="https://nosolounjpg.com/" target={'_blank'} rel="noreferrer">Frequent Questions</a>

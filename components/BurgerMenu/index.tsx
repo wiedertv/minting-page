@@ -148,7 +148,7 @@ const Burger = () => {
   return (
     <>     
       <BurgerWrapper>
-            <Image src="/images/iso.png" alt='Logo de NOJPG' width={26.5} height={70} />
+            <Image src="/images/LogoHTHA.png" alt='Logo de NOJPG' width={90} height={90} />
             <StyledBurger open={open} onClick={() => setOpen(!open)}>
                 <div />
                 <div />

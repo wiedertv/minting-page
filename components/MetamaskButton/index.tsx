@@ -46,7 +46,7 @@ const MetamaskButton = memo(() => {
     const [account, setAccount] = React.useState(null);
     const [chain, setChain] = React.useState(null);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const chainId = 137 // Polygon Mainnet
         // @ts-ignore
         const { ethereum } = window;
@@ -78,7 +78,7 @@ const MetamaskButton = memo(() => {
                   });
             }
         }
-    }, [account, chain, isConnected]);
+    }, [account, chain, isConnected]);*/
 
     const handleLogin = async () => {
         const {provider} = await connectToMetamask();

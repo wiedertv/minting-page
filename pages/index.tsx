@@ -91,8 +91,9 @@ const ContainerVideo = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 10vh;
-  width: 70%;
+  width: 60%;
   position: relative;
+  background: red;
 `;
 
 const Title = styled.h1`
@@ -257,17 +258,17 @@ const FormControllerInput = styled.input`
   }
 `;
 const MintButton = styled.button`
-  background: ${props => props.theme.backgrounds.accent};
+  background: ${props => props.theme.colors.spheres};
   color: ${props => props.theme.colors.primary };
   border: 1px solid ${props => props.theme.backgrounds.primary};
   border-radius: 10px;
   width: 50%;
+  text-align: center;
   padding: 0.8rem 2.5rem;
   font-family: 'GandhiSerifRegular';
   margin: 1rem 0.5rem 0 0.5rem;
   font-size: 1.4rem;
-
-
+ 
   &:hover {
       cursor: pointer;
       opacity: 0.8;
@@ -374,11 +375,12 @@ const Home: NextPage = () => {
       <MainLayout >
         <MintingPage > 
           <ContainerText>
-            <Title>Mark Rise</Title>
+            <Title>Coleccion</Title>
             <Counter> { isActive } </Counter>
             <Description>
-              Exclusive Mint of art in collaboration <br/>
-              with Mark Rise for Not Only a JPG.
+              Adopta tu perrito <br/>
+              o tu gatico. <br />
+              Breve descripcion del proyecto.
             </Description>
             <MintingWrapper>
                 <FormControllerWrapper>
@@ -398,30 +400,29 @@ const Home: NextPage = () => {
                   </FormControllerButton>
                 </FormControllerWrapper>
                 <TotalMinted>
-                  Cost per piece: { costPerPiece/ 10**18 } MATIC
+                  Costo por pieza: { costPerPiece/ 10**18 } (cripto)
                 </TotalMinted>
-                <MintButton 
+              <MintButton 
                   onClick={()=> {
                       handleMint();
                   }}
                   >
-                Mint  
+                Mint 
               </MintButton>
               <TotalMinted>
-                Minted Pieces: { totalMinted }
+                Piezas Minteads.: { totalMinted }
               </TotalMinted>
             </MintingWrapper>
 
 
           </ContainerText>
           <ContainerVideo>
-            <BackgroundSphere />
+           
             {width > 0 && height > 0 ? (
               <video 
-              style={{"zIndex": 1}} 
+              style={{"zIndex": 1, padding: '7px 0'}} 
               src={require('../utils/assets/video.webm')}  
-              width={width > 280 && width < 1024 && width*0.8 || width } 
-              height={width > 280 && width < 1024 && height/2 || height } 
+              
               autoPlay 
               loop 
               muted 

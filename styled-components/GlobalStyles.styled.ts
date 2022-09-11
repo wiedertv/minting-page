@@ -73,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
   left: 0;
   position: absolute;
   opacity: 0.13;
-  filter: blur(157px);
+  filter: blur(70px);
   animation: AnimationName 50s ease-in-out infinite;
   z-index: 0;
 }
@@ -85,7 +85,7 @@ const GlobalStyle = createGlobalStyle`
   top: 0;
   right: 0;  
   opacity: 0.13;
-  filter: blur(157px);
+  filter: blur(50px);
   border-radius: 80%;
   position: absolute;
   animation: CircleTwo 60s ease-in-out infinite;

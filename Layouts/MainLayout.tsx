@@ -14,7 +14,7 @@ const MainWrapper = styled.main`
   display: flex;
   justify-items: center;
   align-items: center;
-  min-height: 83.4vh;
+  min-height: 80.4vh;
   position: relative;
 `
 
@@ -68,9 +68,9 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title, desc
 
 
         <FooterStyled>
-            <Image src="/images/logo_tipografico.png" alt='Logo Tipografico de Not Only A JPG' width={100} height={50} />
+            <h1>HTHA</h1>
             <p>
-              NOJPG is a registered trademark - 2022.
+              Pàgina creada por <a href="https://twitter.com/wiedertv">WiederTV</a>  - 2022.
             </p>
         </FooterStyled>
     </>
