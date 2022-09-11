@@ -51,10 +51,10 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title, desc
   return (
     <> {/* <React.Fragment> */ }
         <Head>
-        <title>{ title || 'Not Only a JPG' }</title>
+        <title>{ title || 'HTHA - Jk7 x WiederTV' }</title>
         <meta name="description" content={`${
             description || 
-            "Not Only a JPG is a platform for 3d crypto Art."}`
+            "Coleccion de HTHA, encargada de donar a darle hogar a mascotas de todas partes del mundo."}`
             } />
         <link rel="ico" href="/favicon.ico" />
         </Head>
